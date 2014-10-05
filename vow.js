@@ -22,18 +22,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-(function (root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define([], factory);
-    } else if (typeof exports === 'object') {
-        // CommonJS
-        module.exports = factory();
-    } else {
-        // Browser globals
-        root.vow = factory();
-    }
-}(this, function () {
+(function(root, factory) {
+	if (typeof define === 'function' && define.amd) {
+		// AMD. Register as an anonymous module.
+		define([], factory);
+	} else if (typeof exports === 'object') {
+		// CommonJS
+		module.exports = factory();
+	} else {
+		// Browser globals
+		root.vow = factory();
+	}
+}(this, function() {
 	return {
 		Promise: function(fn) {
 			var self = this,
@@ -61,7 +61,7 @@ SOFTWARE.
 
 			function fulfill(newValue) {
 				if (state !== states.PENDING) return; // 2.2.2.3
-				
+
 				if (self === value) {
 					reject(new TypeError('Cannot fulfill Promise with itself!'));
 					return;
@@ -167,5 +167,5 @@ SOFTWARE.
 
 			fn(fulfill, reject);
 		}
-	}
+	};
 }));
