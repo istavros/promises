@@ -1,19 +1,26 @@
 var chai = require("chai"),
 	chaiAsPromised = require("chai-as-promised"),
-    vow = require('../vow'),
-	should = chai.should(),
-	Promise = vow.Promise;
+	Vow = require('../vow'),
+	should = chai.should();
 
 chai.use(chaiAsPromised);
 
-describe('promise', function(){
+describe('vow', function() {
 
-	var p = new Promise(function (fulfill, reject) {
-		fulfill(1);
+	var p = new Vow(function(fulfill, reject) {
+		setTimeout(function() {
+			fulfill(1);
+		}, 1);
 	});
 
-	it('fulfilled with value 1',function(){
+	it('fulfilled with value 1', function() {
 		return p.should.become(1);
-	});	
+	});
+
+	it('fulfilled with value 2', function() {
+		return p.then(function(value) {
+			return value + 1;
+		}).should.become(2);
+	});
 
 });
