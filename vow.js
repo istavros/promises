@@ -34,6 +34,17 @@ SOFTWARE.
 		root.Vow = factory();
 	}
 }(this, function() {
+	'use strict';
+
+	var async;
+	if (process && process.nextTick) {
+		async = process.nextTick;
+	} else {
+		async = function(fn) {
+			return setTimeout(fn, 1);
+		};
+	}
+
 	function Vow(fn) {
 		var self = this,
 			value = null,
@@ -106,10 +117,10 @@ SOFTWARE.
 			state = states.FULFILLED;
 			value = newValue;
 
-			setTimeout(function() {
+			async(function() {
 				while (cb.length)
 					coordinate(cb.shift());
-			}, 1);
+			});
 		}
 
 		function reject(newReason) {
@@ -117,10 +128,10 @@ SOFTWARE.
 			state = states.REJECTED;
 			reason = newReason;
 
-			setTimeout(function() {
+			async(function() {
 				while (cb.length)
 					coordinate(cb.shift());
-			}, 1);
+			});
 		}
 
 		function coordinate(handler) {
@@ -128,7 +139,7 @@ SOFTWARE.
 				cb.push(handler);
 				return;
 			}
-			setTimeout(function() {
+			async(function() {
 				var res;
 
 				// 2.2.2.2
@@ -161,7 +172,7 @@ SOFTWARE.
 					return;
 				}
 				handler.reject(reason);
-			}, 1);
+			});
 		}
 
 		fn(fulfill, reject);
