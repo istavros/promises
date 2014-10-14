@@ -37,7 +37,7 @@
 
 <div class="highlight highlight-JavaScript"><pre><span class="kd">var</span> <span class="nx">doSomethingAsync</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vow</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">fulfill</span><span class="p">,</span> <span class="nx">reject</span><span class="p">){</span>
     <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> <span class="nx">fulfill</span><span class="p">(</span><span class="s1">'heyy test passed'</span><span class="p">);</span> <span class="p">},</span> <span class="mi">1</span><span class="p">);</span>
-<span class="p">};</span>
+<span class="p">});</span>
 
 <span class="nx">doSomethingAsync</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">){</span> <span class="k">return</span> <span class="nx">value</span> <span class="o">+</span> <span class="s1">' twice'</span><span class="p">;</span> <span class="p">})</span>
